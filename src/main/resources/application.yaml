@@ -1,4 +1,28 @@
+# Default profile uses H2 file-based database for persistent storage
 spring:
+  datasource:
+    url: jdbc:h2:file:./data/bankingdb
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+---
+# MySQL profile (activate with: --spring.profiles.active=mysql)
+spring:
+  config:
+    activate:
+      on-profile: mysql
   datasource:
     url: jdbc:mysql://localhost:3306/banking_app?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
